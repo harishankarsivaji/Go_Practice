@@ -2,15 +2,18 @@ package main
 
 import (
 	"context"
+	"net"
+
 	"gRPC/proto"
 
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type server struct{}
 
 func main() {
-	listener, err := net.listen("tcp", ":4040")
+	listener, err := net.Listen("tcp", ":4040")
 	if err != nil {
 		panic(err)
 	}
@@ -19,7 +22,7 @@ func main() {
 	proto.RegisterAddServiceServer(srv, &server{})
 	reflection.Register(srv)
 
-	if e := rv.Serve(listener); e != nil {
+	if e := srv.Serve(listener); e != nil {
 		panic(err)
 	}
 
@@ -30,7 +33,7 @@ func (s *server) Add(ctx context.Context, request *proto.Request) (*proto.Respon
 
 	result := a + b
 
-	return $proto.Response{Result: result}, nil
+	return &proto.Response{Result: result}, nil
 
 }
 
@@ -39,6 +42,6 @@ func (s *server) Multiply(ctx context.Context, request *proto.Request) (*proto.R
 
 	result := a * b
 
-	return $proto.Response{Result: result}, nil
+	return &proto.Response{Result: result}, nil
 
 }
