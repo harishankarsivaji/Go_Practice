@@ -16,5 +16,5 @@ func main() {
 
 //GetTime function
 func GetTime(w http.ResponseWriter, r *http.Request) {
-	fmt.printf(w, "Current time is %s\n", time.Now())
+	fmt.Fprintf(w, "Current time is %s", time.Now())
 }
