@@ -1,3 +1,9 @@
+/* Server socket application to listen incominng client msg
+* Listen() - creates the server with type of connection and on specific port
+* Accept() - accepts connection from the client
+* https://golang.org/pkg/net/
+ */
+
 package main
 
 import (
@@ -6,21 +12,20 @@ import (
 )
 
 const (
-	HOST = "localhost"
-	PORT = "1992"
+	PORT = "9092"
 	TYPE = "tcp"
 )
 
 func main() {
-	fmt.Println("Server started ...")
+	fmt.Println("Server started")
 
-	svr, err := net.Listen(TYPE, HOST+":"+PORT)
+	svr, err := net.Listen(TYPE, ":"+PORT)
 	if err != nil {
 		panic(err)
 	}
 	defer svr.Close()
 
-	fmt.Println("Listening on " + HOST + ":" + PORT)
+	fmt.Println("Listening on localhost" + ":" + PORT)
 	fmt.Println("Waiting client...")
 
 	for {
@@ -28,7 +33,7 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-		fmt.Println("client connected")
+		fmt.Println("Client connected")
 		go handleClient(conn)
 	}
 }
