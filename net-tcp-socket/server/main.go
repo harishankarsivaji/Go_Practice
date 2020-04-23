@@ -12,7 +12,9 @@ import (
 )
 
 const (
+	// PORT is a constant
 	PORT = "9092"
+	// TYPE is a constant
 	TYPE = "tcp"
 )
 
