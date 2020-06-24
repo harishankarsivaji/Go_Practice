@@ -1,8 +1,8 @@
-// Buffered Cahnnel 
-// Closing channel 
-// For .. range loop with channel 
+// Buffered Channel
+// Closing channel
+// For .. range loop with channel
 
-ackage main
+package main
 
 import (
 	"fmt"
